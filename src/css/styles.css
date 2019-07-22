@@ -1,0 +1,43 @@
+html {
+    font-family: sans-serif;
+}
+
+.app {
+    display: grid;
+    height: 100%;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 60px;
+    grid-template-areas:
+        "r m m m m m"
+        "r m m m m m"
+        "r m m m m m"
+        "r m m m m m"
+        "r m m m m m"
+        "n f f f f f";
+}
+
+.message-list {
+    grid-area: "m";
+}
+
+
+#root {
+    height: 100%;
+}
+
+.message {
+    margin: 1rem 0;
+}
+
+.message-username {
+    color: gray;
+    margin-left: 1rem;
+    margin-bottom: .25rem;
+}
+
+.message-text {
+    color: white;
+    padding: .5rem 1rem;
+    border-radius: 50px;
+    background-color: #0473ea;
+}

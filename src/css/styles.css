@@ -1,52 +1,66 @@
-html {
-    font-family: sans-serif;
+html, body {
+    font-family: system-ui;
+    font-size: 16px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #root {
     height: 100%;
 }
 
+/* CSS Grid */
 .app {
     display: grid;
     height: 100%;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 60px;
     grid-template-areas:
-        "r m m m m m"
-        "r m m m m m"
-        "r m m m m m"
-        "r m m m m m"
-        "r m m m m m"
-        "n f f f f f";
+        "r r m m m m"
+        "r r m m m m"
+        "r r m m m m"
+        "r r m m m m"
+        "r r m m m m"
+        "n n f f f f";
 }
 
 .message-list {
-    grid-area: "m";
+    grid-area: m;
 }
 
 .send-message {
-    grid-area: "f";
+    grid-area: f;
 }
 
 .new-room {
-    grid-area: "n";
+    grid-area: n;
 }
 
 .room-list {
-    grid-area: "r";
+    grid-area: r;
+}
+
+/* Component Styles */
+
+.message-list {
+    overflow-y: scroll;
 }
 
 .message {
-    margin: 1rem 0;
+    text-align: right;
+    margin: 1rem 2rem;
 }
 
 .message-username {
+    display: none;
     color: gray;
     margin-left: 1rem;
     margin-bottom: .25rem;
 }
 
 .message-text {
+    display: inline-block;
     color: white;
     padding: .5rem 1rem;
     border-radius: 50px;
@@ -54,8 +68,30 @@ html {
 }
 
 .message-timestamp {
+    display: none;
     color: gray;
     font-size: .75em;
     margin-left: 1rem;
     margin-top: .25rem;
+}
+
+.send-message {
+    max-width: 100%;
+    background-color: #f4f4f4;
+    padding: 1rem;
+}
+
+.send-message input {
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    padding: .75rem;
+    border: 1px solid gray;
+    border-radius: 50px;
+}
+
+.send-message input:focus {
+    outline: 0px;
+    border: 1px solid blue;
 }

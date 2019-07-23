@@ -1,0 +1,30 @@
+.room-list {
+    background-color: #f4f4f4;
+
+    .room-title {
+        font-size: 2em;
+    }
+
+    ul {
+        margin: 2rem;
+        padding: 0;
+        list-style: none;
+
+        .room-name a {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .room-name.active a {
+            color: #007AFF;
+
+            &:hover {
+                color: #00AFFF;
+                text-decoration: none;
+            }
+        }
+
+    }
+}

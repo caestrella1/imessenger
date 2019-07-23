@@ -1,0 +1,51 @@
+.message-list {
+    overflow-y: scroll;
+
+    .message {
+        margin: 1rem 2rem;
+
+        .message-timestamp {
+            display: none;
+            color: gray;
+            font-size: .75em;
+            margin-left: 1rem;
+            margin-top: .25rem;
+        }
+
+        .message-bubble {
+            display: inline-block;
+            color: white;
+            padding: .5rem 1rem;
+            border-radius: 50px;
+            background-color: #007AFF;
+        }
+
+        &.sent {
+            text-align: right;
+
+            .message-username {
+                display: none;
+            }
+
+            .message-bubble {
+                color: white;
+                background-color: #007AFF;
+            }
+        }
+
+        &.received {
+            text-align: left;
+
+            .message-username {
+                color: gray;
+                margin-left: 1rem;
+                margin-bottom: .25rem;
+            }
+
+            .message-bubble {
+                color: black;
+                background-color: #E5E5EA;
+            }
+        }
+    }
+}

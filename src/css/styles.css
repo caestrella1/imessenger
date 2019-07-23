@@ -2,6 +2,10 @@ html {
     font-family: sans-serif;
 }
 
+#root {
+    height: 100%;
+}
+
 .app {
     display: grid;
     height: 100%;
@@ -20,9 +24,16 @@ html {
     grid-area: "m";
 }
 
+.send-message {
+    grid-area: "f";
+}
 
-#root {
-    height: 100%;
+.new-room {
+    grid-area: "n";
+}
+
+.room-list {
+    grid-area: "r";
 }
 
 .message {

@@ -69,37 +69,62 @@ html, body {
 
 .room-list .room-name a {
     text-decoration: none;
-    color: blue;
-    font-size: 18px;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.room-list .room-name.active a {
+    color: #007AFF;
 }
 
 .room-list .room-name a:hover {
-    color: purple;
+    color: #00AFFF;
     text-decoration: none;
 }
+
+/* Message UI */
 
 .message-list {
     overflow-y: scroll;
 }
 
-.message {
+.message.sent {
     text-align: right;
     margin: 1rem 2rem;
 }
 
-.message-username {
-    display: none;
+.message.received {
+    text-align: left;
+    margin: 1rem 2rem;
+}
+
+.message-bubble {
+    display: inline-block;
+    color: white;
+    padding: .5rem 1rem;
+    border-radius: 50px;
+    background-color: #007AFF;
+}
+
+.message.sent .message-bubble {
+    color: white;
+    background-color: #007AFF;
+}
+
+.message.received .message-bubble {
+    color: black;
+    background-color: #E5E5EA;
+}
+
+.message.received .message-username {
     color: gray;
     margin-left: 1rem;
     margin-bottom: .25rem;
 }
 
-.message-text {
-    display: inline-block;
-    color: white;
-    padding: .5rem 1rem;
-    border-radius: 50px;
-    background-color: #0473ea;
+.message.sent .message-username {
+    display: none;
 }
 
 .message-timestamp {
@@ -122,11 +147,11 @@ html, body {
     box-sizing: border-box;
     height: 100%;
     padding: .75rem;
-    border: 1px solid gray;
+    border: 1px solid #D1D1D6;
     border-radius: 50px;
 }
 
 .send-message input:focus {
     outline: 0px;
-    border: 1px solid blue;
+    border: 1px solid #007AFF;
 }

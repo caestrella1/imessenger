@@ -9,6 +9,7 @@ class MessageList extends React.Component {
                     return (
                         <Message
                             key={index}
+                            currentUser={this.props.currentUser}
                             username={message.senderId}
                             text={message.parts[0].payload.content}
                             sent={message.createdAt}

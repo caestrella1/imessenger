@@ -41,3 +41,10 @@ html {
     border-radius: 50px;
     background-color: #0473ea;
 }
+
+.message-timestamp {
+    color: gray;
+    font-size: .75em;
+    margin-left: 1rem;
+    margin-top: .25rem;
+}

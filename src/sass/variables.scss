@@ -1,38 +1,78 @@
-/* Apple Color Palette */
-$red: rgb(255, 59, 48);
-$blue: rgb(0, 122, 255);
-$indigo: rgb(88, 86, 214);
+:root {
+    /* Apple Color Palette */
+    --red: rgb(255, 59, 48);
+    --blue: rgb(0, 122, 255);
+    --indigo: rgb(88, 86, 214);
+    --green: rgb(52, 199, 89);
 
-/* Light Mode */
-$gray: rgb(142, 142, 147);
-$gray2: rgb(174, 174, 178);
-$gray3: rgb(199, 199, 204);
-$gray4: rgb(209, 209, 214);
-$gray5: rgb(229, 229, 234);
-$gray6: rgb(242, 242, 247);
+    /* Light Mode */
+    --gray: rgb(142, 142, 147);
+    --gray2: rgb(174, 174, 178);
+    --gray3: rgb(199, 199, 204);
+    --gray4: rgb(209, 209, 214);
+    --gray5: rgb(229, 229, 234);
+    --gray6: rgb(242, 242, 247);
 
-/* Dark Mode */
-$gray-dark: rgb(142, 142, 147);
-$gray2-dark: rgb(174, 174, 178);
-$gray3-dark: rgb(72, 72, 74);
-$gray4-dark: rgb(58, 58, 60);
-$gray5-dark: rgb(44, 44, 46);
-$gray6-dark: rgb(28, 28, 30);
+    /* Default Theme */
+    --bg-color: white;
+    --bg-accent: var(--gray6);
 
+    --highlight: var(--blue);
+    --highlight-dark: darken(var(--highlight), var(--darken-amount));
 
-$divider: rgb(229, 229, 234);
+    --text-primary: black;
+    --text-detail: var(--gray);
+    --text-highlighted: white;
 
-$darken-amount: 10%;
-$disabled-color: 30%;
+    --divider: var(--gray5);
+    --input-text: black;
+    --input-background: white;
+    --input-border: 1px solid var(--gray4);
+    --input-border-highlight: 1px solid var(--highlight);
 
-$rounded-sm: 6px;
-$rounded-pill: 50px;
+    /* Components */
+    --button-text: white;
+    --button: var(--highlight);
+    --notification: var(--red);
 
-/* component styles */
-$bg-color: white;
-$bg-color-accent: $gray6;
+    --message-sent-text: white;
+    --message-sent-bg: var(--highlight);
+    --message-received-text: black;
+    --message-received-bg: var(--gray6);
 
-$text-detail: $gray;
+    /* Components */
 
-$message-sent: $blue;
-$message-received: $gray5;
+    --darken-amount: 10%;
+    --disabled-tint: 30%;
+
+    --rounded-sm: 6px;
+    --rounded-pill: 50px;
+}
+
+.app.dark {
+    --gray: rgb(142, 142, 147);
+    --gray2: rgb(99, 99, 102);
+    --gray3: rgb(72, 72, 74);
+    --gray4: rgb(58, 58, 60);
+    --gray5: rgb(44, 44, 46);
+    --gray6: rgb(28, 28, 30);
+
+    --bg-color: var(--gray6);
+    --bg-accent: var(--gray6);
+
+    --highlight: var(--blue);
+    --highlight-dark: darken(var(--highlight), var(--darken-amount));
+
+    --text-primary: white;
+    --text-detail: var(--gray);
+    --text-highlighted: white;
+
+    --divider: var(--gray5);
+    --input-text: white;
+    --input-background: var(--gray5);
+    --input-border: 1px solid var(--gray4);
+    --input-border-highlight: 1px solid var(--highlight);
+
+    --message-received-text: white;
+    --message-received-bg: var(--gray3);
+}

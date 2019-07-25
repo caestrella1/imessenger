@@ -1,4 +1,5 @@
 .message-list {
+    background-color: var(--bg-color);
     overflow-y: scroll;
 
     .message {
@@ -6,7 +7,7 @@
 
         .message-timestamp {
             display: none;
-            color: $text-detail;
+            color: var(--text-detail);
             font-size: .75em;
             margin-left: 1rem;
             margin-top: .25rem;
@@ -28,8 +29,8 @@
             }
 
             .message-bubble {
-                color: white;
-                background-color: $message-sent;
+                color: var(--message-sent-text);
+                background-color: var(--message-sent-bg);
             }
         }
 
@@ -43,8 +44,8 @@
             }
 
             .message-bubble {
-                color: black;
-                background-color: $message-received;
+                color: var(--message-received-text);
+                background-color: var(--message-received-bg);
             }
         }
     }

@@ -1,8 +1,8 @@
 .send-message {
     max-width: 100%;
-    background-color: $bg-color-accent;
+    background-color: var(--bg-accent);
     padding: 1rem;
-    border-top: 1px solid $divider;
+    border-top: 1px solid var(--divider);
 
     input {
         font-size: 14px;
@@ -10,12 +10,14 @@
         box-sizing: border-box;
         height: 100%;
         padding: 1rem;
-        border: 1px solid darken($bg-color-accent, $darken-amount);
-        border-radius: $rounded-pill;
+        color: var(--input-text);
+        background-color: var(--input-background);
+        border: var(--input-border);
+        border-radius: var(--rounded-pill);
 
         &:focus {
             outline: 0px;
-            border: 1px solid $blue;
+            border: var(--input-border-highlight);
         }
     }
 }

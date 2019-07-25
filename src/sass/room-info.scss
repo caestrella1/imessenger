@@ -1,14 +1,15 @@
 .room-info {
     padding-left: 2rem;
-    background-color: $bg-color;
-    border-bottom: 1px solid $divider;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--divider);
 
     .room-title {
+        color: var(--text-primary);
         margin-bottom: .4rem;
     }
 
     .user-list {
         display: inline-block;
-        color: $blue;
+        color: var(--highlight);
     }
 }

@@ -3,12 +3,12 @@
     align-items: stretch;
     padding: 1rem;
 
-    background-color: $bg-color-accent;
-    border-top: 1px solid $divider;
-    border-right: 1px solid $divider;
+    background-color: var(--bg-color);
+    border-top: 1px solid var(--divider);
+    border-right: 1px solid var(--divider);
 
     input, button {
-        border-radius: $rounded-pill;
+        border-radius: var(--rounded-pill);
         padding: 1rem;
     }
 
@@ -16,20 +16,22 @@
         flex-grow: 4;
         font-size: 14px;
         margin-right: 1rem;
-        border: 1px solid darken($gray6, $darken-amount);
+        color: var(--input-text);
+        background-color: var(--input-background);
+        border: var(--input-border);
 
         &:focus {
             outline: none;
-            border: 1px solid $blue;
+            border: 1px solid var(--blue);
         }
     }
 
     button {
         flex-grow: 1;
         font-size: 28px;
-        color: white;
+        color: var(--button-text);
         border: 0;
-        background-color: $blue;
+        background-color: var(--button);
 
         .plus {
             display: block;
@@ -37,7 +39,7 @@
         }
 
         &:active {
-            background-color: darken($blue, $darken-amount);
+            filter: brightness(75%);
         }
 
         &:focus {
@@ -45,7 +47,7 @@
         }
 
         &:disabled {
-            background-color: lighten($blue, $disabled-color);
+            opacity: 0.5;
         }
     }
 }

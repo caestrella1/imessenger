@@ -112,6 +112,7 @@ class App extends React.Component {
                     subscribeToRoom={this.subscribeToRoom}
                     rooms={[...this.state.joinableRooms, this.state.joinedRooms]}/>
                 <RoomInfo
+                    currentUser={this.currentUser}
                     room={this.state.currentRoom}/>
                 <MessageList
                     currentUser={this.currentUser}

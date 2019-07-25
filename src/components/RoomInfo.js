@@ -3,22 +3,13 @@ import React from 'react';
 class RoomInfo extends React.Component {
 
     getUsers() {
-        let result = '';
-        let index = 0;
-        let users = this.props.room.userStore.users;
-        let count = Object.keys(users).length;
-        for (let [key, user] of Object.entries(users)) {
-            result += user.name;
+        let users = Object.values(this.props.room.userStore.users);
+        let replace = this.props.currentUser.name;
+        let regex = new RegExp(replace, 'g');
 
-            index++;
-            if (index === count - 1) {
-                result += ' and ';
-            }
-            else if (index !== count - 1 && index !== count) {
-                result += ', ';
-            }
-        }
-        return result;
+        return users.map((user) => {
+            return user.name;
+        }).join(', ').replace(regex, 'You').replace(/, ([^,]+)$/, ' and $1');
     }
 
     render() {

@@ -4,7 +4,7 @@ class RoomList extends React.Component {
 
     getRoomCount() {
         let rooms = this.props.rooms[0];
-        return rooms.length  + (rooms.length > 1 || rooms.length == 0 ? ' Rooms' : ' Room');
+        return rooms.length  + (rooms.length > 1 || rooms.length === 0 ? ' Rooms' : ' Room');
     }
 
     render() {

@@ -19,7 +19,7 @@ class NewRoomForm extends React.Component {
     }
 
     handleInput() {
-        if (document.getElementById('room-input').value.length == 0)
+        if (document.getElementById('room-input').value.length === 0)
             document.getElementById('add-room').disabled = true;
         else document.getElementById('add-room').disabled = false;
     }

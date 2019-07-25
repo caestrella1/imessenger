@@ -7,8 +7,9 @@ class RoomList extends React.Component {
 
         return (
             <div className="rooms">
-                <div className="room-title">
-                    <h2>Room List</h2>
+                <div className="room-header">
+                    <h1 className="room-title">Room List</h1>
+                    <span className="room-count">10 Rooms</span>
                 </div>
                 <ul className="room-list">
                     {orderedRooms.map(room => {

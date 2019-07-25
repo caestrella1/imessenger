@@ -10,19 +10,23 @@
         "l l"
         "l l";
 
-    .room-title {
-        display: flex;
+    .room-header {
         grid-area: h;
         width: 100%;
         height: 100%;
         box-sizing: border-box;
-        font-size: 1.5em;
         background-color: white;
         border-right: 1px solid $divider;
         border-bottom: 1px solid $divider;
+        padding-left: 1rem;
 
-        h2 {
-            margin: auto 1rem;
+        .room-title {
+            margin-bottom: .4rem;
+        }
+
+        .room-count {
+            display: inline-block;
+            color: $text-detail;
         }
 
     }
@@ -94,6 +98,7 @@
 
         .room-name:not(.active) button:hover {
             color: $blue;
+            cursor: pointer;
         }
 
         .room-name.active button {

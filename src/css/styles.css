@@ -1,3 +1,6 @@
+/* Apple Color Palette */
+/* darkest to lightest */
+/* component styles */
 html, body {
   font-family: system-ui;
   font-size: 16px;
@@ -29,7 +32,7 @@ html, body {
   background-color: #cecece; }
 
 .new-room {
-  background-color: #F4F4F4;
+  background-color: #f2f2f7;
   border-top: 1px solid #e5e5ea;
   border-right: 1px solid #e5e5ea; }
   .new-room form {
@@ -46,11 +49,11 @@ html, body {
       margin-right: 10px;
       padding: 1rem;
       font-size: 14px;
-      border: 1px solid #dbdbdb;
+      border: 1px solid #d2d2e4;
       border-radius: 6px; }
       .new-room form input:focus {
         outline: none;
-        border: 1px solid #007AFF; }
+        border: 1px solid #007aff; }
     .new-room form button {
       box-sizing: border-box;
       width: 20%;
@@ -59,7 +62,7 @@ html, body {
       font-size: 1.5em;
       border-radius: 6px;
       border: 0;
-      background-color: #007AFF; }
+      background-color: #007aff; }
       .new-room form button:active {
         background-color: #0062cc; }
       .new-room form button:focus {
@@ -84,7 +87,7 @@ html, body {
       margin: auto 1rem; }
   .rooms .room-list {
     grid-area: l;
-    background-color: #F4F4F4;
+    background-color: #f2f2f7;
     border-right: 1px solid #e5e5ea;
     overflow-y: scroll;
     margin: 0;
@@ -103,15 +106,44 @@ html, body {
       border-bottom: 1px solid #e5e5ea; }
       .rooms .room-list .room-name button:focus {
         outline: none; }
+      .rooms .room-list .room-name button .is-private {
+        display: block;
+        color: #8e8e93;
+        font-weight: normal;
+        font-size: 0.65em;
+        text-transform: uppercase;
+        margin-bottom: 6px; }
+      .rooms .room-list .room-name button .last-message {
+        display: block;
+        color: #8e8e93;
+        font-weight: normal;
+        font-size: 0.65em;
+        margin-top: 6px; }
+      .rooms .room-list .room-name button .unread-messages {
+        display: none; }
+      .rooms .room-list .room-name button .unread-messages {
+        display: none;
+        color: white;
+        text-align: center;
+        font-size: 16px;
+        font-weight: normal;
+        background-color: #ff3b30;
+        padding: 5px 10px 8px 10px;
+        margin-left: .5rem;
+        border-radius: 50px;
+        min-width: .75em;
+        min-height: .75em; }
     .rooms .room-list .room-name:not(.active) button:hover {
-      color: #007AFF; }
+      color: #007aff; }
     .rooms .room-list .room-name.active button {
       color: white;
-      background-color: #007AFF; }
+      background-color: #007aff; }
+      .rooms .room-list .room-name.active button .is-private, .rooms .room-list .room-name.active button .last-message {
+        color: white; }
 
 .send-message {
   max-width: 100%;
-  background-color: #F4F4F4;
+  background-color: #f2f2f7;
   padding: 1rem;
   border-top: 1px solid #e5e5ea; }
   .send-message input {
@@ -120,11 +152,11 @@ html, body {
     box-sizing: border-box;
     height: 100%;
     padding: .75rem;
-    border: 1px solid #dbdbdb;
+    border: 1px solid #d2d2e4;
     border-radius: 50px; }
     .send-message input:focus {
       outline: 0px;
-      border: 1px solid #007AFF; }
+      border: 1px solid #007aff; }
 
 .message-list {
   overflow-y: scroll; }
@@ -132,7 +164,7 @@ html, body {
     margin: 1rem 2rem; }
     .message-list .message .message-timestamp {
       display: none;
-      color: gray;
+      color: #8e8e93;
       font-size: .75em;
       margin-left: 1rem;
       margin-top: .25rem; }
@@ -140,15 +172,14 @@ html, body {
       display: inline-block;
       color: white;
       padding: .5rem 1rem;
-      border-radius: 50px;
-      background-color: #007AFF; }
+      border-radius: 50px; }
     .message-list .message.sent {
       text-align: right; }
       .message-list .message.sent .message-username {
         display: none; }
       .message-list .message.sent .message-bubble {
         color: white;
-        background-color: #007AFF; }
+        background-color: #007aff; }
     .message-list .message.received {
       text-align: left; }
       .message-list .message.received .message-username {
@@ -157,6 +188,6 @@ html, body {
         margin-bottom: .25rem; }
       .message-list .message.received .message-bubble {
         color: black;
-        background-color: #E5E5EA; }
+        background-color: #e5e5ea; }
 
 /*# sourceMappingURL=styles.css.map */

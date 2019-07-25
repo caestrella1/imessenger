@@ -29,7 +29,7 @@
 
     .room-list {
         grid-area: l;
-        background-color: $light-gray;
+        background-color: $bg-color-accent;
         border-right: 1px solid $divider;
 
         overflow-y: scroll;
@@ -53,6 +53,43 @@
             &:focus {
                 outline: none;
             }
+
+            .is-private {
+                display: block;
+                color: $text-detail;
+                font-weight: normal;
+                font-size: 0.65em;
+                text-transform: uppercase;
+                margin-bottom: 6px;
+            }
+
+            .last-message {
+                display: block;
+                color: $text-detail;
+                font-weight: normal;
+                font-size: 0.65em;
+                margin-top: 6px;
+            }
+
+            .unread-messages {
+                display: none;
+            }
+
+            .unread-messages {
+                display: none;
+
+                color: white;
+                text-align: center;
+                font-size: 16px;
+                font-weight: normal;
+
+                background-color: $red;
+                padding: 5px 10px 8px 10px;
+                margin-left: .5rem;
+                border-radius: 50px;
+                min-width: .75em;
+                min-height: .75em;
+            }
         }
 
         .room-name:not(.active) button:hover {
@@ -62,10 +99,10 @@
         .room-name.active button {
             color: white;
             background-color: $blue;
-        }
 
-        ul {
-
+            .is-private, .last-message {
+                color: white;
+            }
         }
     }
 }

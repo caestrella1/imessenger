@@ -1,5 +1,5 @@
 .new-room {
-    background-color: $light-gray;
+    background-color: $bg-color-accent;
     border-top: 1px solid $divider;
     border-right: 1px solid $divider;
 
@@ -18,7 +18,7 @@
             margin-right: 10px;
             padding: 1rem;
             font-size: 14px;
-            border: 1px solid darken($light-gray, $darken-amount);
+            border: 1px solid darken($gray6, $darken-amount);
             border-radius: $rounded-sm;
 
             &:focus {

@@ -6,7 +6,7 @@
 
         .message-timestamp {
             display: none;
-            color: gray;
+            color: $text-detail;
             font-size: .75em;
             margin-left: 1rem;
             margin-top: .25rem;
@@ -17,7 +17,6 @@
             color: white;
             padding: .5rem 1rem;
             border-radius: 50px;
-            background-color: #007AFF;
         }
 
         &.sent {
@@ -29,7 +28,7 @@
 
             .message-bubble {
                 color: white;
-                background-color: #007AFF;
+                background-color: $message-sent;
             }
         }
 
@@ -44,7 +43,7 @@
 
             .message-bubble {
                 color: black;
-                background-color: #E5E5EA;
+                background-color: $message-received;
             }
         }
     }

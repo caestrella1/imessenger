@@ -3,6 +3,7 @@ import Chatkit from '@pusher/chatkit-client';
 import MessageList from './components/MessageList';
 import SendMessageForm from './components/SendMessageForm';
 import RoomList from './components/RoomList';
+import RoomInfo from './components/RoomInfo';
 import NewRoomForm from './components/NewRoomForm';
 import './css/styles.css';
 
@@ -14,6 +15,7 @@ class App extends React.Component {
         super();
         this.state = {
             roomId: null,
+            currentRoom: null,
             messages: [],
             joinableRooms: [],
             joinedRooms: []
@@ -22,6 +24,7 @@ class App extends React.Component {
         this.subscribeToRoom = this.subscribeToRoom.bind(this);
         this.getRoomsList = this.getRoomsList.bind(this);
         this.createRoom = this.createRoom.bind(this);
+        this.getCurrentRoom = this.getCurrentRoom.bind(this);
     }
 
     componentDidMount() {
@@ -70,8 +73,19 @@ class App extends React.Component {
                 roomId: room.id
             })
             this.getRoomsList();
+            this.getCurrentRoom();
         })
         .catch(err => console.log("Error subscribing to room", err));
+    }
+
+    getCurrentRoom() {
+        let room = null;
+        if (this.state.roomId) {
+            room = this.state.joinedRooms.find(x => x.id === this.state.roomId);
+            this.setState({
+                currentRoom: room
+            });
+        }
     }
 
 
@@ -97,6 +111,8 @@ class App extends React.Component {
                     roomId={this.state.roomId}
                     subscribeToRoom={this.subscribeToRoom}
                     rooms={[...this.state.joinableRooms, this.state.joinedRooms]}/>
+                <RoomInfo
+                    room={this.state.currentRoom}/>
                 <MessageList
                     currentUser={this.currentUser}
                     messages={this.state.messages}/>

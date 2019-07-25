@@ -1,0 +1,14 @@
+.room-info {
+    padding-left: 2rem;
+    background-color: $bg-color;
+    border-bottom: 1px solid $divider;
+
+    .room-title {
+        margin-bottom: .4rem;
+    }
+
+    .user-list {
+        display: inline-block;
+        color: $text-detail;
+    }
+}

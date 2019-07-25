@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Message(props) {
-    const alignment = props.currentUser.id === props.username ? "sent" : "received";
+    const alignment = props.currentUser.name === props.username ? "sent" : "received";
 
     return (
         <div className={"message " + alignment}>

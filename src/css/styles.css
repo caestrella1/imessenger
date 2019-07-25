@@ -15,8 +15,8 @@ html, body {
   display: grid;
   height: 100%;
   grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: 60px 1fr 1fr 1fr 1fr 1fr 1fr 60px;
-  grid-template-areas: "b b b b b b b b" "r r m m m m m m" "r r m m m m m m" "r r m m m m m m" "r r m m m m m m" "r r m m m m m m" "r r m m m m m m" "n n f f f f f f"; }
+  grid-template-rows: 60px 100px 1fr 1fr 1fr 1fr 1fr 60px;
+  grid-template-areas: "b b b b b b b b" "r r i i i i i i" "r r m m m m m m" "r r m m m m m m" "r r m m m m m m" "r r m m m m m m" "r r m m m m m m" "n n f f f f f f"; }
   .app .navbar {
     grid-area: b; }
   .app .message-list {
@@ -27,9 +27,21 @@ html, body {
     grid-area: n; }
   .app .rooms {
     grid-area: r; }
+  .app .room-info {
+    grid-area: i; }
 
 .navbar {
   background-color: #cecece; }
+
+.room-info {
+  padding-left: 2rem;
+  background-color: white;
+  border-bottom: 1px solid #e5e5ea; }
+  .room-info .room-title {
+    margin-bottom: .4rem; }
+  .room-info .user-list {
+    display: inline-block;
+    color: #8e8e93; }
 
 .new-room {
   background-color: #f2f2f7;
@@ -71,7 +83,7 @@ html, body {
 .rooms {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: 100px 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas: "h h" "l l" "l l" "l l" "l l" "l l"; }
   .rooms .room-title {
     display: flex;
@@ -79,7 +91,7 @@ html, body {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    font-size: 1.75em;
+    font-size: 1.5em;
     background-color: white;
     border-right: 1px solid #e5e5ea;
     border-bottom: 1px solid #e5e5ea; }
@@ -87,7 +99,6 @@ html, body {
       margin: auto 1rem; }
   .rooms .room-list {
     grid-area: l;
-    background-color: #f2f2f7;
     border-right: 1px solid #e5e5ea;
     overflow-y: scroll;
     margin: 0;
@@ -99,6 +110,7 @@ html, body {
       box-sizing: border-box;
       padding: 1rem;
       color: black;
+      background-color: white;
       font-size: 20px;
       font-weight: bold;
       text-align: left;

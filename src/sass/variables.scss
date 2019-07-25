@@ -1,8 +1,9 @@
 /* Apple Color Palette */
 $red: rgb(255, 59, 48);
 $blue: rgb(0, 122, 255);
+$indigo: rgb(88, 86, 214);
 
-/* darkest to lightest */
+/* Light Mode */
 $gray: rgb(142, 142, 147);
 $gray2: rgb(174, 174, 178);
 $gray3: rgb(199, 199, 204);
@@ -10,10 +11,19 @@ $gray4: rgb(209, 209, 214);
 $gray5: rgb(229, 229, 234);
 $gray6: rgb(242, 242, 247);
 
+/* Dark Mode */
+$gray-dark: rgb(142, 142, 147);
+$gray2-dark: rgb(174, 174, 178);
+$gray3-dark: rgb(72, 72, 74);
+$gray4-dark: rgb(58, 58, 60);
+$gray5-dark: rgb(44, 44, 46);
+$gray6-dark: rgb(28, 28, 30);
+
 
 $divider: rgb(229, 229, 234);
 
 $darken-amount: 10%;
+$disabled-color: 30%;
 
 $rounded-sm: 6px;
 $rounded-pill: 50px;

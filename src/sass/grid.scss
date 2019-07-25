@@ -13,7 +13,7 @@ html, body {
 .app {
     display: grid;
     height: 100%;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 60px 100px 1fr 1fr 1fr 1fr 1fr 60px;
     grid-template-areas:
         "b b b b b b b b"
@@ -31,4 +31,5 @@ html, body {
         .new-room {grid-area: n;}
         .rooms {grid-area: r;}
         .room-info {grid-area: i;}
+        // .settings {grid-area: s;}
 }

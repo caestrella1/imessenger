@@ -1,6 +1,12 @@
 import React from 'react';
 
 class RoomList extends React.Component {
+
+    getRoomCount() {
+        let rooms = this.props.rooms[0];
+        return rooms.length  + (rooms.length > 1 || rooms.length == 0 ? ' Rooms' : ' Room');
+    }
+
     render() {
 
         const orderedRooms = [...this.props.rooms[0]].sort((a, b) => a.id - b.id);
@@ -9,7 +15,7 @@ class RoomList extends React.Component {
             <div className="rooms">
                 <div className="room-header">
                     <h1 className="room-title">Room List</h1>
-                    <span className="room-count">10 Rooms</span>
+                    <span className="room-count">{this.getRoomCount()}</span>
                 </div>
                 <ul className="room-list">
                     {orderedRooms.map(room => {

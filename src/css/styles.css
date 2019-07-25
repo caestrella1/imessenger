@@ -22,45 +22,105 @@ html, body {
     grid-area: f; }
   .app .new-room {
     grid-area: n; }
-  .app .room-list {
+  .app .rooms {
     grid-area: r; }
 
 .navbar {
   background-color: #cecece; }
 
 .new-room {
-  background-color: #007AFF; }
+  background-color: #F4F4F4;
+  border-top: 1px solid #e5e5ea;
+  border-right: 1px solid #e5e5ea; }
+  .new-room form {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 1rem; }
+    .new-room form input {
+      box-sizing: border-box;
+      width: 80%;
+      height: 100%;
+      margin-right: 10px;
+      padding: 1rem;
+      font-size: 14px;
+      border: 1px solid #dbdbdb;
+      border-radius: 6px; }
+      .new-room form input:focus {
+        outline: none;
+        border: 1px solid #007AFF; }
+    .new-room form button {
+      box-sizing: border-box;
+      width: 20%;
+      height: 100%;
+      color: white;
+      font-size: 1.5em;
+      border-radius: 6px;
+      border: 0;
+      background-color: #007AFF; }
+      .new-room form button:active {
+        background-color: #0062cc; }
+      .new-room form button:focus {
+        outline: none; }
 
-.room-list {
-  background-color: #f4f4f4; }
-  .room-list .room-title {
-    font-size: 2em; }
-  .room-list ul {
-    margin: 2rem;
+.rooms {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-areas: "h h" "l l" "l l" "l l" "l l" "l l"; }
+  .rooms .room-title {
+    display: flex;
+    grid-area: h;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    font-size: 1.75em;
+    background-color: white;
+    border-right: 1px solid #e5e5ea;
+    border-bottom: 1px solid #e5e5ea; }
+    .rooms .room-title h2 {
+      margin: auto 1rem; }
+  .rooms .room-list {
+    grid-area: l;
+    background-color: #F4F4F4;
+    border-right: 1px solid #e5e5ea;
+    overflow-y: scroll;
+    margin: 0;
     padding: 0;
     list-style: none; }
-    .room-list ul .room-name a {
-      text-decoration: none;
+    .rooms .room-list .room-name button {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 1rem;
       color: black;
       font-size: 20px;
-      font-weight: bold; }
-    .room-list ul .room-name.active a {
+      font-weight: bold;
+      text-align: left;
+      border: 0;
+      border-bottom: 1px solid #e5e5ea; }
+      .rooms .room-list .room-name button:focus {
+        outline: none; }
+    .rooms .room-list .room-name:not(.active) button:hover {
       color: #007AFF; }
-      .room-list ul .room-name.active a:hover {
-        color: #00AFFF;
-        text-decoration: none; }
+    .rooms .room-list .room-name.active button {
+      color: white;
+      background-color: #007AFF; }
 
 .send-message {
   max-width: 100%;
-  background-color: #f4f4f4;
-  padding: 1rem; }
+  background-color: #F4F4F4;
+  padding: 1rem;
+  border-top: 1px solid #e5e5ea; }
   .send-message input {
     font-size: 14px;
     width: 100%;
     box-sizing: border-box;
     height: 100%;
     padding: .75rem;
-    border: 1px solid #D1D1D6;
+    border: 1px solid #dbdbdb;
     border-radius: 50px; }
     .send-message input:focus {
       outline: 0px;

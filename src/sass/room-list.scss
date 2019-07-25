@@ -1,30 +1,71 @@
-.room-list {
-    background-color: #f4f4f4;
+.rooms {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-areas:
+        "h h"
+        "l l"
+        "l l"
+        "l l"
+        "l l"
+        "l l";
 
     .room-title {
-        font-size: 2em;
+        display: flex;
+        grid-area: h;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        font-size: 1.75em;
+        background-color: white;
+        border-right: 1px solid $divider;
+        border-bottom: 1px solid $divider;
+
+        h2 {
+            margin: auto 1rem;
+        }
+
     }
 
-    ul {
-        margin: 2rem;
+    .room-list {
+        grid-area: l;
+        background-color: $light-gray;
+        border-right: 1px solid $divider;
+
+        overflow-y: scroll;
+        margin: 0;
         padding: 0;
         list-style: none;
 
-        .room-name a {
-            text-decoration: none;
+        .room-name button {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 1rem;
             color: black;
             font-size: 20px;
             font-weight: bold;
-        }
+            text-align: left;
 
-        .room-name.active a {
-            color: #007AFF;
+            border: 0;
+            border-bottom: 1px solid $divider;
 
-            &:hover {
-                color: #00AFFF;
-                text-decoration: none;
+            &:focus {
+                outline: none;
             }
         }
 
+        .room-name:not(.active) button:hover {
+            color: $blue;
+        }
+
+        .room-name.active button {
+            color: white;
+            background-color: $blue;
+        }
+
+        ul {
+
+        }
     }
 }

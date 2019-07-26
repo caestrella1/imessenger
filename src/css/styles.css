@@ -25,6 +25,7 @@
   --input-border: 1px solid var(--gray4);
   --input-border-highlight: 1px solid var(--highlight);
   /* Components */
+  --danger: var(--red);
   --button-text: white;
   --button: var(--highlight);
   --notification: var(--red);
@@ -116,8 +117,12 @@ html, body {
       filter: brightness(75%); }
 
 .room-info {
-  padding-left: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--bg-color);
+  padding-left: 2rem;
+  padding-right: 2rem;
   border-bottom: 1px solid var(--divider); }
   .room-info .room-title {
     color: var(--text-primary);
@@ -125,12 +130,25 @@ html, body {
   .room-info .user-list {
     display: inline-block;
     color: var(--highlight); }
+  .room-info .room-delete {
+    color: var(--danger);
+    background-color: var(--bg-color);
+    border: 0;
+    padding: .5rem 1rem;
+    border: 1px solid var(--danger);
+    border-radius: var(--rounded-sm);
+    font-size: 14px; }
+    .room-info .room-delete:focus {
+      outline: none; }
+    .room-info .room-delete:hover {
+      color: var(--text-highlighted);
+      background-color: var(--danger); }
 
 .new-room {
   display: flex;
   align-items: stretch;
   padding: 1rem;
-  background-color: var(--bg-color);
+  background-color: var(--bg-accent);
   border-top: 1px solid var(--divider);
   border-right: 1px solid var(--divider); }
   .new-room input, .new-room button {

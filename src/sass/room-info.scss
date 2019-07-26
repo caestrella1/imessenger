@@ -1,6 +1,10 @@
 .room-info {
-    padding-left: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: var(--bg-color);
+    padding-left: 2rem;
+    padding-right: 2rem;
     border-bottom: 1px solid var(--divider);
 
     .room-title {
@@ -11,5 +15,25 @@
     .user-list {
         display: inline-block;
         color: var(--highlight);
+    }
+
+    .room-delete {
+        color: var(--danger);
+        background-color: var(--bg-color);
+        border: 0;
+        padding: .5rem 1rem;
+        border: 1px solid var(--danger);
+        border-radius: var(--rounded-sm);
+
+        font-size: 14px;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:hover {
+            color: var(--text-highlighted);
+            background-color: var(--danger);
+        }
     }
 }

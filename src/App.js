@@ -28,6 +28,7 @@ class App extends React.Component {
         this.createRoom = this.createRoom.bind(this);
         this.getCurrentRoom = this.getCurrentRoom.bind(this);
         this.toggleDarkMode = this.toggleDarkMode.bind(this);
+        this.deleteRoom = this.deleteRoom.bind(this);
     }
 
     componentDidMount() {
@@ -60,21 +61,32 @@ class App extends React.Component {
     }
 
     subscribeToRoom(roomId) {
+        let lastRoom = this.state.currentRoom;
         this.setState({ messages: [] });
         this.currentUser.subscribeToRoomMultipart({
-            roomId: roomId,
+            roomId,
             hooks: {
                 onMessage: message => {
-                    this.setState({
-                        messages: [...this.state.messages, message]
-                    });
+                    console.log('New message in ', message.room.name);
+                    if (message.room.id === this.state.roomId) {
+                        this.setState({
+                            messages: [...this.state.messages, message]
+                        });
+                    }
+                    else {
+                        this.setState({
+                            messages: [...this.state.messages]
+                        });
+                    }
                 }
             }
         })
         .then(room => {
             this.setState({
-                roomId: room.id
+                roomId: room.id,
+                currentRoom: room
             })
+
             this.getRoomsList();
             this.getCurrentRoom();
         })
@@ -112,6 +124,17 @@ class App extends React.Component {
         });
     }
 
+    deleteRoom(roomId) {
+        this.currentUser.deleteRoom({ roomId })
+          .then(() => {
+              this.subscribeToRoom(this.currentUser.rooms[0].id);
+              console.log(`Deleted room with ID: ${roomId}`)
+          })
+          .catch(err => {
+            console.log(`Error deleted room ${roomId}: ${err}`)
+          })
+    }
+
     render() {
         return (
             <div id="app" className={"app " + (this.state.isDark ? "dark" : "light")}>
@@ -124,7 +147,8 @@ class App extends React.Component {
                     rooms={[...this.state.joinableRooms, this.state.joinedRooms]}/>
                 <RoomInfo
                     currentUser={this.currentUser}
-                    room={this.state.currentRoom}/>
+                    room={this.state.currentRoom}
+                    deleteRoom={this.deleteRoom}/>
                 <MessageList
                     currentUser={this.currentUser}
                     messages={this.state.messages}/>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Chatkit from '@pusher/chatkit-client';
+import Navbar from './components/Navbar';
 import MessageList from './components/MessageList';
 import SendMessageForm from './components/SendMessageForm';
 import RoomList from './components/RoomList';
@@ -18,13 +19,15 @@ class App extends React.Component {
             currentRoom: null,
             messages: [],
             joinableRooms: [],
-            joinedRooms: []
+            joinedRooms: [],
+            isDark: false
         };
         this.sendMessage = this.sendMessage.bind(this);
         this.subscribeToRoom = this.subscribeToRoom.bind(this);
         this.getRoomsList = this.getRoomsList.bind(this);
         this.createRoom = this.createRoom.bind(this);
         this.getCurrentRoom = this.getCurrentRoom.bind(this);
+        this.toggleDarkMode = this.toggleDarkMode.bind(this);
     }
 
     componentDidMount() {
@@ -103,10 +106,18 @@ class App extends React.Component {
         .catch(err => console.log("error creating room", err));
     }
 
+    toggleDarkMode() {
+        this.setState({
+            isDark: !this.state.isDark
+        });
+    }
+
     render() {
         return (
-            <div className="app">
-                <nav className="navbar"></nav>
+            <div id="app" className={"app " + (this.state.isDark ? "dark" : "light")}>
+                <Navbar
+                    isDark={this.state.isDark}
+                    toggleDarkMode={this.toggleDarkMode}/>
                 <RoomList
                     roomId={this.state.roomId}
                     subscribeToRoom={this.subscribeToRoom}

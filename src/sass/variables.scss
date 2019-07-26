@@ -1,4 +1,4 @@
-:root {
+:root, .app.light {
     /* Apple Color Palette */
     --red: rgb(255, 59, 48);
     --blue: rgb(0, 122, 255);
@@ -38,15 +38,21 @@
     --message-sent-text: white;
     --message-sent-bg: var(--highlight);
     --message-received-text: black;
-    --message-received-bg: var(--gray6);
+    --message-received-bg: var(--gray5);
 
     /* Components */
+
+    --theme-transition: all .25s ease-in-out;
 
     --darken-amount: 10%;
     --disabled-tint: 30%;
 
     --rounded-sm: 6px;
     --rounded-pill: 50px;
+
+    #toggle-theme {
+        background-color: var(--indigo);
+    }
 }
 
 .app.dark {
@@ -75,4 +81,12 @@
 
     --message-received-text: white;
     --message-received-bg: var(--gray3);
+
+    #toggle-theme {
+        background-color: var(--blue);
+    }
+}
+
+.app.dark *, .app.light * {
+    transition: var(--theme-transition);
 }

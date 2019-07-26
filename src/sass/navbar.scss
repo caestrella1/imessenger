@@ -1,4 +1,26 @@
 .navbar {
+    display: flex;
+    justify-content: flex-end;
     background-color: var(--bg-color);
     border-bottom: 1px solid var(--divider);
+
+    #toggle-theme {
+        border: 0;
+        margin: .5rem 2rem .5rem 1rem;
+        border-radius: var(--rounded-pill);
+
+        [data-icon] {
+            color: white;
+            font-size: 2em;
+            padding: 0 1rem;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &:active {
+            filter: brightness(75%);
+        }
+    }
 }

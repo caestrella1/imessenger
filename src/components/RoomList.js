@@ -9,7 +9,9 @@ class RoomList extends React.Component {
 
     render() {
 
-        const orderedRooms = [...this.props.rooms[0]].sort((a, b) => a.id - b.id);
+        const orderedRooms = [...this.props.rooms[0]].sort((a, b) =>
+            new Date(b.lastMessageAt) - new Date(a.lastMessageAt)
+        )
 
         return (
             <div className="rooms">

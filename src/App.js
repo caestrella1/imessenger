@@ -21,15 +21,20 @@ class App extends React.Component {
             joinedRooms: [],
             isDark: false
         };
-        this.sendMessage = this.sendMessage.bind(this);
+
+        /* Room methods */
+        this.createRoom = this.createRoom.bind(this);
         this.subscribeToRoom = this.subscribeToRoom.bind(this);
         this.getRoomsList = this.getRoomsList.bind(this);
-        this.createRoom = this.createRoom.bind(this);
-        this.toggleDarkMode = this.toggleDarkMode.bind(this);
         this.deleteRoom = this.deleteRoom.bind(this);
-        this.markMessageAsRead = this.markMessageAsRead.bind(this);
+
+        /* Message methods */
         this.getMessages = this.getMessages.bind(this);
+        this.markMessageAsRead = this.markMessageAsRead.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
+
+        /* Option methods */
+        this.toggleDarkMode = this.toggleDarkMode.bind(this);
     }
 
     componentDidMount() {
@@ -50,15 +55,14 @@ class App extends React.Component {
         .catch(err => console.log("error connecting to current user", err));
     }
 
-    getRoomsList() {
-        this.currentUser.getJoinableRooms()
-        .then(joinableRooms => {
-            this.setState({
-                joinableRooms,
-                joinedRooms: this.currentUser.rooms
-            })
+    /* Room methods */
+
+    createRoom(roomName) {
+        this.currentUser.createRoom({
+            name: roomName
         })
-        .catch(err => console.log("get joinable rooms error", err));
+        .then(room => this.subscribeToRoom(room.id))
+        .catch(err => console.log("error creating room", err));
     }
 
     subscribeToRoom(roomId) {
@@ -86,6 +90,30 @@ class App extends React.Component {
         })
         .catch(err => console.log("Error subscribing to room", err));
     }
+
+    getRoomsList() {
+        this.currentUser.getJoinableRooms()
+        .then(joinableRooms => {
+            this.setState({
+                joinableRooms,
+                joinedRooms: this.currentUser.rooms
+            })
+        })
+        .catch(err => console.log("get joinable rooms error", err));
+    }
+
+    deleteRoom(roomId) {
+        this.currentUser.deleteRoom({ roomId })
+          .then(() => {
+              this.subscribeToRoom(this.currentUser.rooms[0].id);
+              console.log(`Deleted room with ID: ${roomId}`)
+          })
+          .catch(err => {
+            console.log(`Error deleted room ${roomId}: ${err}`)
+          })
+    }
+
+    /* Message methods */
 
     getMessages(roomId) {
         this.currentUser.fetchMultipartMessages({
@@ -129,29 +157,12 @@ class App extends React.Component {
         });
     }
 
-    createRoom(roomName) {
-        this.currentUser.createRoom({
-            name: roomName
-        })
-        .then(room => this.subscribeToRoom(room.id))
-        .catch(err => console.log("error creating room", err));
-    }
+    /* Option methods */
 
     toggleDarkMode() {
         this.setState({
             isDark: !this.state.isDark
         });
-    }
-
-    deleteRoom(roomId) {
-        this.currentUser.deleteRoom({ roomId })
-          .then(() => {
-              this.subscribeToRoom(this.currentUser.rooms[0].id);
-              console.log(`Deleted room with ID: ${roomId}`)
-          })
-          .catch(err => {
-            console.log(`Error deleted room ${roomId}: ${err}`)
-          })
     }
 
     render() {

@@ -12,6 +12,9 @@
 
     .room-header {
         grid-area: h;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         height: 100%;
         box-sizing: border-box;
@@ -22,6 +25,7 @@
 
         .room-title {
             color: var(--text-primary);
+            margin-top: 0;
             margin-bottom: .4rem;
         }
 
@@ -42,12 +46,12 @@
         padding: 0;
         list-style: none;
 
-        .room-name button {
-            display: block;
+        .room button {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             width: 100%;
-            box-sizing: border-box;
             padding: 1rem;
-            color: var(--text-primary);
             background-color: var(--bg-color);
             font-size: 20px;
             font-weight: bold;
@@ -60,30 +64,36 @@
                 outline: none;
             }
 
-            .is-private {
-                display: block;
-                color: var(--text-detail);
-                font-weight: normal;
-                font-size: 0.65em;
-                text-transform: uppercase;
-                margin-bottom: 6px;
+            .room-meta {
+
+                .room-name {
+                    color: var(--text-primary);
+                }
+
+                .room-is-private {
+                    display: block;
+                    color: var(--text-detail);
+                    font-weight: normal;
+                    font-size: 0.65em;
+                    text-transform: uppercase;
+                    margin-bottom: 6px;
+                }
+
+                .room-last {
+                    display: block;
+                    color: var(--text-detail);
+                    font-weight: normal;
+                    font-size: 0.65em;
+                    margin-top: 6px;
+                }
             }
 
-            .last-message {
-                display: block;
-                color: var(--text-detail);
-                font-weight: normal;
-                font-size: 0.65em;
-                margin-top: 6px;
-            }
-
-            .unread-messages {
+            .room-unread {
                 display: none;
             }
 
-            .unread-messages {
-                display: none;
-
+            .room-unread.show {
+                display: inline;
                 color: white;
                 text-align: center;
                 font-size: 16px;
@@ -98,16 +108,15 @@
             }
         }
 
-        .room-name:not(.active) button:hover {
+        .room:not(.active) button:hover {
             color: var(--highlight);
             cursor: pointer;
         }
 
-        .room-name.active button {
-            color: white;
+        .room.active button {
             background-color: var(--highlight);
 
-            .is-private, .last-message {
+            .room-meta * {
                 color: white;
             }
         }

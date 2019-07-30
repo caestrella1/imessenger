@@ -126,6 +126,7 @@ html, body {
   border-bottom: 1px solid var(--divider); }
   .room-info .room-title {
     color: var(--text-primary);
+    margin-top: 0;
     margin-bottom: .4rem; }
   .room-info .user-list {
     display: inline-block;
@@ -187,6 +188,9 @@ html, body {
   grid-template-areas: "h h" "l l" "l l" "l l" "l l" "l l"; }
   .rooms .room-header {
     grid-area: h;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -196,6 +200,7 @@ html, body {
     padding-left: 1rem; }
     .rooms .room-header .room-title {
       color: var(--text-primary);
+      margin-top: 0;
       margin-bottom: .4rem; }
     .rooms .room-header .room-count {
       display: inline-block;
@@ -208,37 +213,39 @@ html, body {
     margin: 0;
     padding: 0;
     list-style: none; }
-    .rooms .room-list .room-name button {
-      display: block;
+    .rooms .room-list .room button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       width: 100%;
-      box-sizing: border-box;
       padding: 1rem;
-      color: var(--text-primary);
       background-color: var(--bg-color);
       font-size: 20px;
       font-weight: bold;
       text-align: left;
       border: 0;
       border-bottom: 1px solid var(--divider); }
-      .rooms .room-list .room-name button:focus {
+      .rooms .room-list .room button:focus {
         outline: none; }
-      .rooms .room-list .room-name button .is-private {
+      .rooms .room-list .room button .room-meta .room-name {
+        color: var(--text-primary); }
+      .rooms .room-list .room button .room-meta .room-is-private {
         display: block;
         color: var(--text-detail);
         font-weight: normal;
         font-size: 0.65em;
         text-transform: uppercase;
         margin-bottom: 6px; }
-      .rooms .room-list .room-name button .last-message {
+      .rooms .room-list .room button .room-meta .room-last {
         display: block;
         color: var(--text-detail);
         font-weight: normal;
         font-size: 0.65em;
         margin-top: 6px; }
-      .rooms .room-list .room-name button .unread-messages {
+      .rooms .room-list .room button .room-unread {
         display: none; }
-      .rooms .room-list .room-name button .unread-messages {
-        display: none;
+      .rooms .room-list .room button .room-unread.show {
+        display: inline;
         color: white;
         text-align: center;
         font-size: 16px;
@@ -249,13 +256,12 @@ html, body {
         border-radius: 50px;
         min-width: .75em;
         min-height: .75em; }
-    .rooms .room-list .room-name:not(.active) button:hover {
+    .rooms .room-list .room:not(.active) button:hover {
       color: var(--highlight);
       cursor: pointer; }
-    .rooms .room-list .room-name.active button {
-      color: white;
+    .rooms .room-list .room.active button {
       background-color: var(--highlight); }
-      .rooms .room-list .room-name.active button .is-private, .rooms .room-list .room-name.active button .last-message {
+      .rooms .room-list .room.active button .room-meta * {
         color: white; }
 
 .send-message {

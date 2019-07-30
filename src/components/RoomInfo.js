@@ -3,7 +3,7 @@ import React from 'react';
 class RoomInfo extends React.Component {
 
     getUsers() {
-        let users = Object.values(this.props.room.userStore.users);
+        let users = Object.values(this.props.room.users);
         let replace = this.props.currentUser.name;
         let regex = new RegExp(replace, 'g');
 

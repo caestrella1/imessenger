@@ -15,8 +15,7 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            roomId: null,
-            currentRoom: null,
+            room: null,
             messages: [],
             joinableRooms: [],
             joinedRooms: [],
@@ -26,9 +25,11 @@ class App extends React.Component {
         this.subscribeToRoom = this.subscribeToRoom.bind(this);
         this.getRoomsList = this.getRoomsList.bind(this);
         this.createRoom = this.createRoom.bind(this);
-        this.getCurrentRoom = this.getCurrentRoom.bind(this);
         this.toggleDarkMode = this.toggleDarkMode.bind(this);
         this.deleteRoom = this.deleteRoom.bind(this);
+        this.markMessageAsRead = this.markMessageAsRead.bind(this);
+        this.getMessages = this.getMessages.bind(this);
+        this.sendMessage = this.sendMessage.bind(this);
     }
 
     componentDidMount() {
@@ -61,52 +62,70 @@ class App extends React.Component {
     }
 
     subscribeToRoom(roomId) {
-        let lastRoom = this.state.currentRoom;
+        if (this.state.room && this.state.room.id === roomId) {return;}
+
         this.setState({ messages: [] });
         this.currentUser.subscribeToRoomMultipart({
             roomId,
             hooks: {
                 onMessage: message => {
-                    console.log('New message in ', message.room.name);
-                    if (message.room.id === this.state.roomId) {
-                        this.setState({
-                            messages: [...this.state.messages, message]
-                        });
-                    }
-                    else {
-                        this.setState({
-                            messages: [...this.state.messages]
-                        });
+                    this.setState({
+                        joinableRooms: this.state.joinableRooms,
+                        joinedRooms: this.currentUser.rooms
+                    })
+                    if (this.state.room &&
+                        this.state.room.id === message.room.id) {
+                        this.getMessages(this.state.room.id);
                     }
                 }
             }
         })
         .then(room => {
-            this.setState({
-                roomId: room.id,
-                currentRoom: room
-            })
-
-            this.getRoomsList();
-            this.getCurrentRoom();
+            this.setState({room});
+            this.getMessages(this.state.room.id);
         })
         .catch(err => console.log("Error subscribing to room", err));
     }
 
-    getCurrentRoom() {
-        let room = null;
-        if (this.state.roomId) {
-            room = this.state.joinedRooms.find(x => x.id === this.state.roomId);
+    getMessages(roomId) {
+        this.currentUser.fetchMultipartMessages({
+            roomId,
+            direction: 'older'
+        })
+        .then(messages => {
             this.setState({
-                currentRoom: room
+                messages: [...messages]
+            })
+            let lastMessage = messages[messages.length - 1];
+            this.markMessageAsRead(lastMessage.room.id, lastMessage);
+        })
+        .catch(err => {
+            console.log("Error fetching messages:", err);
+        })
+    }
+
+    markMessageAsRead(roomId, message) {
+        if (roomId === message.room.id) {
+            this.currentUser.setReadCursor({
+                roomId,
+                position: message.id
+            })
+            .catch(err => {
+                console.log('Error marking conversation as read', err);
             });
         }
     }
 
-
     sendMessage(text) {
         this.currentUser.sendMessage({
-            text, roomId: this.state.roomId
+            text, roomId: this.state.room.id
+        })
+        .then(message => {
+            this.markMessageAsRead(message.room.id, message);
+            this.getMessages(this.state.room.id);
+        })
+        .catch(err => {
+            console.log('error sending message:', err)
         });
     }
 
@@ -142,12 +161,13 @@ class App extends React.Component {
                     isDark={this.state.isDark}
                     toggleDarkMode={this.toggleDarkMode}/>
                 <RoomList
-                    roomId={this.state.roomId}
+                    room={this.state.room}
                     subscribeToRoom={this.subscribeToRoom}
-                    rooms={[...this.state.joinableRooms, this.state.joinedRooms]}/>
+                    getRoomsList={this.getRoomsList}
+                    rooms={[...this.state.joinedRooms]}/>
                 <RoomInfo
                     currentUser={this.currentUser}
-                    room={this.state.currentRoom}
+                    room={this.state.room}
                     deleteRoom={this.deleteRoom}/>
                 <MessageList
                     currentUser={this.currentUser}

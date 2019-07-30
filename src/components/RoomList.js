@@ -2,45 +2,70 @@ import React from 'react';
 
 class RoomList extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            roomId: null
+        };
+        this.listRooms = this.listRooms.bind(this);
+        this.getRoomCount = this.getRoomCount.bind(this);
+    }
+
     getRoomCount() {
-        let rooms = this.props.rooms[0];
-        return rooms.length  + (rooms.length > 1 || rooms.length === 0 ? ' Rooms' : ' Room');
+        return this.props.rooms.length +
+            (this.props.rooms.length > 1 || this.props.rooms.length === 0 ?
+            ' Rooms' : ' Room');
+    }
+
+    listRooms() {
+        if (this.props.rooms && this.props.room) {
+            this.props.getRoomsList();
+            return (
+                this.props.rooms.map(room => {
+                    const active = this.props.room.id === room.id ? "active" : "";
+                    const isPrivate = room.isPrivate ? "Private" : "Public";
+                    const showUnread = room.unreadCount > 0 ? "show" : "";
+                    const lastMessage = new Date(room.lastMessageAt);
+
+                    return (
+                        <li key={room.id} className={"room " + active}>
+                            <button onClick={() => this.props.subscribeToRoom(room.id)}>
+                                <div className="room-meta">
+                                    <span className="room-is-private">
+                                        {isPrivate}
+                                    </span>
+                                    <span className="room-name">
+                                        {room.name}
+                                    </span>
+                                    <span className="room-last">
+                                        { timeDifference(new Date(), lastMessage) }
+                                    </span>
+                                </div>
+                                <div className={"room-unread " + showUnread}>
+                                    {room.unreadCount}
+                                </div>
+                            </button>
+                        </li>
+                    );
+                })
+            );
+        }
+        else {
+            return null;
+        }
     }
 
     render() {
-
-        const orderedRooms = [...this.props.rooms[0]].sort((a, b) =>
-            new Date(b.lastMessageAt) - new Date(a.lastMessageAt)
-        )
-
         return (
             <div className="rooms">
                 <div className="room-header">
-                    <h1 className="room-title">Room List</h1>
-                    <span className="room-count">{this.getRoomCount()}</span>
+                    <div>
+                        <h1 className="room-title">Room List</h1>
+                        <span className="room-count">{this.getRoomCount()}</span>
+                    </div>
                 </div>
                 <ul className="room-list">
-                    {orderedRooms.map(room => {
-                        const active = this.props.roomId === room.id ? "active" : "";
-                        const isPrivate = room.isPrivate ? "Private" : "Public";
-                        const showUnread = room.unreadCount > 0 ? "show" : "";
-                        const lastMessage = new Date(room.lastMessageAt);
-
-                        return (
-                            <li key={room.id} className={"room-name " + active}>
-                                <button onClick={() => this.props.subscribeToRoom(room.id)}>
-                                    <span className="is-private">{isPrivate}</span>
-                                    {room.name}
-                                    <span className={"unread-messages " + showUnread}>
-                                        {room.unreadCount}
-                                    </span>
-                                    <span className="last-message">
-                                        { timeDifference(new Date(), lastMessage) }
-                                    </span>
-                                </button>
-                            </li>
-                        );
-                    })}
+                    {this.listRooms()}
                 </ul>
             </div>
         );

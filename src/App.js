@@ -158,7 +158,6 @@ class App extends React.Component {
         return (
             <div id="app" className={"app " + (this.state.isDark ? "dark" : "light")}>
                 <Navbar
-                    isDark={this.state.isDark}
                     toggleDarkMode={this.toggleDarkMode}/>
                 <RoomList
                     room={this.state.room}

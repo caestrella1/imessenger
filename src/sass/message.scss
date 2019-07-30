@@ -15,10 +15,18 @@
 
         .message-bubble {
             display: inline-block;
+            position: relative;
             max-width: 60%;
             color: white;
-            padding: 1% 1.8%;
-            border-radius: 20px;
+            padding: 10px 15px;
+            border-radius: 18px;
+
+            &:before, &:after {
+                content: "";
+            	position: absolute;
+                bottom: -2px;
+                height: 20px;
+            }
         }
 
         &.sent {
@@ -29,8 +37,24 @@
             }
 
             .message-bubble {
+                text-align: left;
                 color: var(--message-sent-text);
                 background-color: var(--message-sent-bg);
+
+                &:before {
+                    right:-7px;
+            		border-right:20px solid var(--message-sent-bg);
+            		border-bottom-left-radius: 16px 14px;
+            		transform:translate(0, -2px);
+            	}
+
+            	&:after {
+            		right:-56px;
+            		width:26px;
+            		background:white;
+            		border-bottom-left-radius: 10px;
+            		transform:translate(-30px, -2px);
+            	}
             }
         }
 
@@ -46,6 +70,21 @@
             .message-bubble {
                 color: var(--message-received-text);
                 background-color: var(--message-received-bg);
+
+                &:before {
+            		left:-7px;
+            		border-left:20px solid var(--message-received-bg);
+            		border-bottom-right-radius: 16px 14px;
+            		transform:translate(0, -2px);
+            	}
+
+            	&:after {
+            		left:4px;
+            		width:26px;
+            		background:white;
+            		border-bottom-right-radius: 10px;
+            		transform:translate(-30px, -2px);
+            	}
             }
         }
     }

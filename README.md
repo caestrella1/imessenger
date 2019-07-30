@@ -1,3 +1,24 @@
+# Chat App
+Chat App is an Apple-esque styled chat room app developed in ReactJS using [Pusher Chatkit's API](https://pusher.com/chatkit). It allows users to create and join chat rooms and send messages to friends. This project is currently in development, with more features on the way.
+
+### Current Features
+- Create new chat rooms
+- Send messages to chat room members
+- New message notifications
+- Unread indicators
+- Delete chat rooms
+- Dark/Light Mode toggle
+- Desktop support only
+
+### In Development
+- Login and registration system
+- Only show joined chat rooms in room list
+- Find joinable chat rooms form
+- Typing indicators
+- ???
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

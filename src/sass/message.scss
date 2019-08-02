@@ -24,8 +24,7 @@
             &:before, &:after {
                 content: "";
             	position: absolute;
-                bottom: -2px;
-                height: 20px;
+                transition: var(--theme-transition);
             }
         }
 
@@ -42,19 +41,22 @@
                 background-color: var(--message-sent-bg);
 
                 &:before {
-                    right:-7px;
-            		border-right:20px solid var(--message-sent-bg);
-            		border-bottom-left-radius: 16px 14px;
-            		transform:translate(0, -2px);
-            	}
+                    width: 30px;
+                    height: 20px;
+                    bottom: 0px;
+                    right: -15px;
+                    border-bottom-left-radius: 25px;
+                    background-color: var(--message-sent-bg);
+                }
 
-            	&:after {
-            		right:-56px;
-            		width:26px;
-            		background:white;
-            		border-bottom-left-radius: 10px;
-            		transform:translate(-30px, -2px);
-            	}
+                &:after {
+                    width: 20px;
+                    height: 30px;
+                    bottom: -7px;
+                    right: -20px;
+                    border-bottom-left-radius: 25px;
+                    background-color: var(--bg-color);
+                }
             }
         }
 
@@ -72,19 +74,22 @@
                 background-color: var(--message-received-bg);
 
                 &:before {
-            		left:-7px;
-            		border-left:20px solid var(--message-received-bg);
-            		border-bottom-right-radius: 16px 14px;
-            		transform:translate(0, -2px);
-            	}
+                    width: 30px;
+                    height: 20px;
+                    bottom: 0px;
+                    left: -15px;
+                    border-bottom-right-radius: 25px;
+                    background-color: var(--message-received-bg);
+                }
 
-            	&:after {
-            		left:4px;
-            		width:26px;
-            		background:white;
-            		border-bottom-right-radius: 10px;
-            		transform:translate(-30px, -2px);
-            	}
+                &:after {
+                    width: 20px;
+                    height: 30px;
+                    bottom: -7px;
+                    left: -20px;
+                    border-bottom-right-radius: 25px;
+                    background-color: var(--bg-color);
+                }
             }
         }
     }

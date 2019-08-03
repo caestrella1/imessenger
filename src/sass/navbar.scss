@@ -1,8 +1,19 @@
 .navbar {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: stretch;
     background-color: var(--bg-color);
     border-bottom: 1px solid var(--divider);
+
+    #app-title {
+        margin: auto 1.15rem;
+        color: var(--text-primary);
+
+        [data-icon] {
+            color: var(--highlight);
+            margin-right: 1rem;
+        }
+    }
 
     #toggle-theme {
         border: 0;

@@ -1,23 +1,66 @@
 .send-message {
-    max-width: 100%;
+    display: flex;
+    align-items: stretch;
+    padding: .8rem;
+
     background-color: var(--bg-accent);
-    padding: 1rem;
     border-top: 1px solid var(--divider);
 
-    input {
+    #send-message, #toggle-emoji {
+        border-radius: var(--rounded-pill);
+        margin: 0 .25rem;
+        padding: 0 1rem;
+    }
+
+    #send-message {
         font-size: 14px;
         width: 100%;
         box-sizing: border-box;
         height: 100%;
-        padding: 1rem;
         color: var(--input-text);
         background-color: var(--input-background);
         border: var(--input-border);
-        border-radius: var(--rounded-pill);
 
         &:focus {
             outline: 0px;
             border: var(--input-border-highlight);
+        }
+    }
+
+    #toggle-emoji {
+        display: block;
+        color: var(--text-highlighted);
+        background-color: var(--highlight);
+        border: 0;
+
+        [data-icon] {
+            font-size: 1.5em;
+        }
+
+        &:active {
+            filter: brightness(75%);
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    #emoji-picker {
+        display: none;
+    }
+
+    #emoji-picker.show {
+        display: block;
+        position: absolute;
+        bottom: 5rem;
+
+        .emoji-mart-anchor {
+            cursor: pointer;
+
+            &:active, &:focus {
+                outline: none;
+            }
         }
     }
 }

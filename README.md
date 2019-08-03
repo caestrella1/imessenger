@@ -1,9 +1,10 @@
-# Chat App
-Chat App is an Apple-esque styled chat room app developed in ReactJS using [Pusher Chatkit's API](https://pusher.com/chatkit). It allows users to create and join chat rooms and send messages to friends. This project is currently in development, with more features on the way.
+# iMessenger
+iMessenger is an Apple-esque styled chat room app developed in ReactJS using [Pusher Chatkit's API](https://pusher.com/chatkit). It allows users to create and join chat rooms and send messages to friends. This project is currently in development, with more features on the way.
 
 ### Current Features
 - Create new chat rooms
 - Send messages to chat room members
+- Slack-styled emoji picker using [Emoji-Mart](https://github.com/missive/emoji-mart)
 - New message notifications
 - Unread indicators
 - Delete chat rooms
@@ -15,7 +16,6 @@ Chat App is an Apple-esque styled chat room app developed in ReactJS using [Push
 - Only show joined chat rooms in room list
 - Find joinable chat rooms form
 - Typing indicators
-- ???
 
 ---
 

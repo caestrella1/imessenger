@@ -1,4 +1,5 @@
 import React from 'react';
+import EmojiAware from 'emoji-aware';
 
 class Message extends React.Component {
 
@@ -11,16 +12,7 @@ class Message extends React.Component {
         else {
             return (
                 <div className="message-bubble">
-                    {[...text].map((char, i) => {
-                        if (isEmoji(char)) {
-                            return (
-                                <span className="inline-emoji" key={i}>{char}</span>
-                            );
-                        }
-                        else {
-                            return char;
-                        }
-                    })}
+                    {splitEmojiFromText(text)}
                 </div>
             );
         }
@@ -44,22 +36,23 @@ class Message extends React.Component {
     }
 }
 
-function isEmoji(str) {
-    const ranges = [
-        '\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]',
-    ].join('|');
+function splitEmojiFromText(str) {
+    let buffer = [];
+    let chars = EmojiAware.split(str);
 
-    const removeEmoji = str => str.replace(new RegExp(ranges, 'g'), '');
-    return str.length !== removeEmoji(str).length;
+    for (let c of chars) {
+        if (isEmoji(c)) buffer.push(<span className="inline-emoji">{c}</span>);
+        else buffer.push(c);
+    }
+    return buffer;
+}
+
+function isEmoji(str) {
+    return EmojiAware.withoutEmoji(str).length === 0;
 }
 
 function isOnlyEmoji(str) {
-    const ranges = [
-        '\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]',
-    ].join('|');
-
-    const removeEmoji = str => str.replace(new RegExp(ranges, 'g'), '');
-    return removeEmoji(str).length === 0;
+    return EmojiAware.withoutEmoji(str).length === 0;
 }
 
 export default Message;

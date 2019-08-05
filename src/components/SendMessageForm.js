@@ -65,6 +65,7 @@ class SendMessageForm extends React.Component {
                         onSelect={this.addEmojiToMessage}
                         title="Choose an emoji"
                         color="var(--highlight)"
+                        emojiSize={32}
                         emoji="smile"/>
                 </div>
 

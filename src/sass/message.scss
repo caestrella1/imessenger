@@ -21,11 +21,25 @@
             padding: 10px 15px;
             border-radius: 18px;
 
+            .inline-emoji {
+                position: relative;
+                font-size: 1.5em;
+                line-height: 0;
+                bottom: -4px;
+            }
+
             &:before, &:after {
                 content: "";
             	position: absolute;
                 transition: var(--theme-transition);
             }
+        }
+
+        .message-emoji {
+            display: inline-block;
+            font-size: 3.5em;
+            letter-spacing: .15em;
+            max-width: 60%;
         }
 
         &.sent {

@@ -1,31 +1,9 @@
-.send-message {
+.send-message-container {
     display: flex;
     align-items: stretch;
     padding: .8rem;
-
     background-color: var(--bg-accent);
     border-top: 1px solid var(--divider);
-
-    #send-message, #toggle-emoji {
-        border-radius: var(--rounded-pill);
-        margin: 0 .25rem;
-        padding: 0 1rem;
-    }
-
-    #send-message {
-        font-size: 14px;
-        width: 100%;
-        box-sizing: border-box;
-        height: 100%;
-        color: var(--input-text);
-        background-color: var(--input-background);
-        border: var(--input-border);
-
-        &:focus {
-            outline: 0px;
-            border: var(--input-border-highlight);
-        }
-    }
 
     #toggle-emoji {
         display: block;
@@ -63,4 +41,30 @@
             }
         }
     }
+
+    .send-message input, #toggle-emoji {
+        border-radius: var(--rounded-pill);
+        margin: 0 .25rem;
+        padding: 0 1rem;
+    }
+
+    .send-message {
+        width: 100%;
+
+        input {
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+            height: 100%;
+            color: var(--input-text);
+            background-color: var(--input-background);
+            border: var(--input-border);
+
+            &:focus {
+                outline: 0px;
+                border: var(--input-border-highlight);
+            }
+        }
+    }
+
 }

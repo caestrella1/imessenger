@@ -28,6 +28,7 @@ class SendMessageForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        console.log('send');
         this.props.sendMessage(this.state.message);
         this.setState({
             message: ""
@@ -56,7 +57,7 @@ class SendMessageForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="send-message">
+            <div className="send-message-container">
                 <div id="emoji-picker"
                     className={this.state.isEmojiPickerVisible ? "show" : ""}>
                     <Picker
@@ -70,14 +71,16 @@ class SendMessageForm extends React.Component {
                     <FontAwesomeIcon icon={faSmile}/>
                 </button>
 
-                <input
-                    id="send-message"
-                    onChange={this.handleChange}
-                    onFocus={this.handleMessageFocus}
-                    value={this.state.message}
-                    placeholder="Send Message"
-                    type="text"/>
-            </form>
+                <form onSubmit={this.handleSubmit} className="send-message">
+                    <input
+                        onChange={this.handleChange}
+                        onFocus={this.handleMessageFocus}
+                        value={this.state.message}
+                        placeholder="Send Message"
+                        type="text"/>
+                </form>
+
+            </div>
         );
     }
 }

@@ -19,9 +19,12 @@ class RoomList extends React.Component {
 
     listRooms() {
         if (this.props.rooms && this.props.room) {
-            this.props.getRoomsList();
+            let orderedRooms = this.props.rooms.sort((a, b) =>
+                new Date(b.lastMessageAt) - new Date(a.lastMessageAt)
+            )
+
             return (
-                this.props.rooms.map(room => {
+                orderedRooms.map(room => {
                     const active = this.props.room.id === room.id ? "active" : "";
                     const isPrivate = room.isPrivate ? "Private" : "Public";
                     const showUnread = room.unreadCount > 0 ? "show" : "";

@@ -19,6 +19,11 @@ class RoomList extends React.Component {
 
     listRooms() {
         if (this.props.rooms && this.props.room) {
+
+            /* Necessary so that the App's state updates and refreshes
+               on new notifications */
+            this.props.getRoomsList();
+
             let orderedRooms = this.props.rooms.sort((a, b) =>
                 new Date(b.lastMessageAt) - new Date(a.lastMessageAt)
             )

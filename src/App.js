@@ -19,6 +19,7 @@ class App extends React.Component {
             messages: [],
             joinableRooms: [],
             joinedRooms: [],
+            usersWhoAreTyping: [],
             isDark: false
         };
 
@@ -27,6 +28,7 @@ class App extends React.Component {
         this.subscribeToRoom = this.subscribeToRoom.bind(this);
         this.getRoomsList = this.getRoomsList.bind(this);
         this.deleteRoom = this.deleteRoom.bind(this);
+        this.sendTypingEvent = this.sendTypingEvent.bind(this);
 
         /* Message methods */
         this.getMessages = this.getMessages.bind(this);
@@ -40,7 +42,7 @@ class App extends React.Component {
     componentDidMount() {
         const chatManager = new Chatkit.ChatManager({
             instanceLocator,
-            userId: 'carlos',
+            userId: prompt('user: '),
             tokenProvider: new Chatkit.TokenProvider({
                 url: tokenURL
             })
@@ -81,7 +83,27 @@ class App extends React.Component {
                         this.state.room.id === message.room.id) {
                         this.getMessages(this.state.room.id);
                     }
+                },
+                onUserStartedTyping: user => {
+                    this.setState({
+                        usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name],
+                    })
+                },
+                onUserStoppedTyping: user => {
+                    this.setState({
+                        usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
+                            username => username !== user.name
+                        ),
+                    })
                 }
+                // onUserStartedTyping: user => {
+                //     console.log('typing...');
+                //     this.userIsTyping(roomId);
+                // },
+                // onUserStoppedTyping: user => {
+                //     console.log('stopped...');
+                //     document.getElementById("type-bubble").outerHTML = "";
+                // }
             }
         })
         .then(room => {
@@ -111,6 +133,12 @@ class App extends React.Component {
           .catch(err => {
             console.log(`Error deleted room ${roomId}: ${err}`)
           })
+    }
+
+    sendTypingEvent() {
+        this.currentUser
+            .isTypingIn({ roomId: this.state.room.id })
+            .catch(error => console.error('error', error))
     }
 
     /* Message methods */
@@ -181,8 +209,12 @@ class App extends React.Component {
                     deleteRoom={this.deleteRoom}/>
                 <MessageList
                     currentUser={this.currentUser}
-                    messages={this.state.messages}/>
-                <SendMessageForm sendMessage={this.sendMessage}/>
+                    messages={this.state.messages}
+                    usersWhoAreTyping={this.state.usersWhoAreTyping}/>
+                <SendMessageForm
+                    currentRoom={this.state.room}
+                    sendMessage={this.sendMessage}
+                    onChange={this.sendTypingEvent}/>
                 <NewRoomForm createRoom={this.createRoom}/>
             </div>
         );

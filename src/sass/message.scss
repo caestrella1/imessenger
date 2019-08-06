@@ -13,6 +13,16 @@
             margin-top: .25rem;
         }
 
+        .user-typing {
+            display: inline-block;
+            position: relative;
+            max-width: 60%;
+            color: var(--text-typing);
+            background-color: var(--message-received-bg);
+            padding: 10px 15px;
+            border-radius: 18px;
+        }
+
         .message-bubble {
             display: inline-block;
             position: relative;

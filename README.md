@@ -1,5 +1,5 @@
 # iMessenger
-iMessenger is an Apple-esque styled chat room app developed in ReactJS using [Pusher Chatkit's API](https://pusher.com/chatkit). It allows users to create and join chat rooms and send messages to friends. This project is currently in development, with more features on the way.
+iMessenger is an Apple-styled, Slack-inspired chat room app developed in ReactJS using [Pusher Chatkit's API](https://pusher.com/chatkit). It allows users to create and join chat rooms and send messages to friends. This project is currently in development, with more features on the way.
 
 ### Current Features
 - Create new chat rooms
@@ -7,6 +7,7 @@ iMessenger is an Apple-esque styled chat room app developed in ReactJS using [Pu
 - Slack-styled emoji picker using [Emoji-Mart](https://github.com/missive/emoji-mart)
 - New message notifications
 - Unread indicators
+- Typing indicators
 - Delete chat rooms
 - Dark/Light Mode toggle
 - Desktop support only
@@ -15,7 +16,6 @@ iMessenger is an Apple-esque styled chat room app developed in ReactJS using [Pu
 - Login and registration system
 - Only show joined chat rooms in room list
 - Find joinable chat rooms form
-- Typing indicators
 
 ---
 

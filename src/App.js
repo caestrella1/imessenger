@@ -15,10 +15,10 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
+            user: null,
             room: null,
+            rooms: null,
             messages: [],
-            joinableRooms: [],
-            joinedRooms: [],
             usersWhoAreTyping: [],
             isDark: false
         };
@@ -26,12 +26,11 @@ class App extends React.Component {
         /* Room methods */
         this.createRoom = this.createRoom.bind(this);
         this.subscribeToRoom = this.subscribeToRoom.bind(this);
-        this.getRoomsList = this.getRoomsList.bind(this);
+        this.getSortedRooms = this.getSortedRooms.bind(this);
         this.deleteRoom = this.deleteRoom.bind(this);
         this.sendTypingEvent = this.sendTypingEvent.bind(this);
 
         /* Message methods */
-        this.getMessages = this.getMessages.bind(this);
         this.markMessageAsRead = this.markMessageAsRead.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
 
@@ -42,17 +41,19 @@ class App extends React.Component {
     componentDidMount() {
         const chatManager = new Chatkit.ChatManager({
             instanceLocator,
-            userId: prompt('user: '),
+            userId: "carlos",
             tokenProvider: new Chatkit.TokenProvider({
                 url: tokenURL
             })
         });
 
         chatManager.connect()
-        .then(currentUser => {
-            this.currentUser = currentUser;
-            this.getRoomsList();
-            this.subscribeToRoom(this.currentUser.rooms[0].id);
+        .then(user => {
+            this.setState({ user });
+            if (this.state.user) {
+                this.getSortedRooms();
+                this.subscribeToRoom(this.state.rooms[0].id);
+            }
         })
         .catch(err => console.log("error connecting to current user", err));
     }
@@ -60,7 +61,7 @@ class App extends React.Component {
     /* Room methods */
 
     createRoom(roomName) {
-        this.currentUser.createRoom({
+        this.state.user.createRoom({
             name: roomName
         })
         .then(room => this.subscribeToRoom(room.id))
@@ -71,18 +72,21 @@ class App extends React.Component {
         if (this.state.room && this.state.room.id === roomId) {return;}
 
         this.setState({ messages: [] });
-        this.currentUser.subscribeToRoomMultipart({
+        let requestedRoom = true;
+
+        this.state.user.subscribeToRoomMultipart({
             roomId,
             hooks: {
                 onMessage: message => {
-                    this.setState({
-                        joinableRooms: this.state.joinableRooms,
-                        joinedRooms: this.currentUser.rooms
-                    })
-                    if (this.state.room &&
-                        this.state.room.id === message.room.id) {
-                        this.getMessages(this.state.room.id);
+                    if ((requestedRoom && roomId === message.room.id) ||
+                        (!requestedRoom && this.state.room.id === message.room.id)) {
+                            this.setState({
+                                messages: [...this.state.messages, message]
+                            })
+                            this.markMessageAsRead(requestedRoom ?
+                                roomId : this.state.room.id, message);
                     }
+                    this.getSortedRooms();
                 },
                 onUserStartedTyping: user => {
                     this.setState({
@@ -96,38 +100,28 @@ class App extends React.Component {
                         ),
                     })
                 }
-                // onUserStartedTyping: user => {
-                //     console.log('typing...');
-                //     this.userIsTyping(roomId);
-                // },
-                // onUserStoppedTyping: user => {
-                //     console.log('stopped...');
-                //     document.getElementById("type-bubble").outerHTML = "";
-                // }
             }
         })
         .then(room => {
             this.setState({room});
-            this.getMessages(this.state.room.id);
+            requestedRoom = false;
         })
         .catch(err => console.log("Error subscribing to room", err));
     }
 
-    getRoomsList() {
-        this.currentUser.getJoinableRooms()
-        .then(joinableRooms => {
-            this.setState({
-                joinableRooms,
-                joinedRooms: this.currentUser.rooms
-            })
-        })
-        .catch(err => console.log("get joinable rooms error", err));
+    getSortedRooms() {
+        let sorted = this.state.user.rooms.sort((a, b) =>
+            new Date(b.lastMessageAt) - new Date(a.lastMessageAt)
+        );
+        this.setState({
+            rooms: sorted
+        });
     }
 
     deleteRoom(roomId) {
-        this.currentUser.deleteRoom({ roomId })
+        this.state.user.deleteRoom({ roomId })
           .then(() => {
-              this.subscribeToRoom(this.currentUser.rooms[0].id);
+              this.subscribeToRoom(this.state.user.rooms[0].id);
               console.log(`Deleted room with ID: ${roomId}`)
           })
           .catch(err => {
@@ -136,52 +130,25 @@ class App extends React.Component {
     }
 
     sendTypingEvent() {
-        this.currentUser
+        this.state.user
             .isTypingIn({ roomId: this.state.room.id })
             .catch(error => console.error('error', error))
     }
 
     /* Message methods */
 
-    getMessages(roomId) {
-        this.currentUser.fetchMultipartMessages({
-            roomId,
-            direction: 'older'
-        })
-        .then(messages => {
-            this.setState({
-                messages: [...messages]
-            })
-            let lastMessage = messages[messages.length - 1];
-            this.markMessageAsRead(lastMessage.room.id, lastMessage);
-        })
-        .catch(err => {
-            console.log("Error fetching messages:", err);
-        })
-    }
-
     markMessageAsRead(roomId, message) {
         if (roomId === message.room.id) {
-            this.currentUser.setReadCursor({
+            this.state.user.setReadCursor({
                 roomId,
                 position: message.id
-            })
-            .catch(err => {
-                console.log('Error marking conversation as read', err);
             });
         }
     }
 
     sendMessage(text) {
-        this.currentUser.sendMessage({
+        this.state.user.sendMessage({
             text, roomId: this.state.room.id
-        })
-        .then(message => {
-            this.markMessageAsRead(message.room.id, message);
-            this.getMessages(this.state.room.id);
-        })
-        .catch(err => {
-            console.log('error sending message:', err)
         });
     }
 
@@ -194,30 +161,33 @@ class App extends React.Component {
     }
 
     render() {
-        return (
-            <div id="app" className={"app " + (this.state.isDark ? "dark" : "light")}>
-                <Navbar
-                    toggleDarkMode={this.toggleDarkMode}/>
-                <RoomList
-                    room={this.state.room}
-                    subscribeToRoom={this.subscribeToRoom}
-                    getRoomsList={this.getRoomsList}
-                    rooms={[...this.state.joinedRooms]}/>
-                <RoomInfo
-                    currentUser={this.currentUser}
-                    room={this.state.room}
-                    deleteRoom={this.deleteRoom}/>
-                <MessageList
-                    currentUser={this.currentUser}
-                    messages={this.state.messages}
-                    usersWhoAreTyping={this.state.usersWhoAreTyping}/>
-                <SendMessageForm
-                    currentRoom={this.state.room}
-                    sendMessage={this.sendMessage}
-                    onChange={this.sendTypingEvent}/>
-                <NewRoomForm createRoom={this.createRoom}/>
-            </div>
-        );
+        if (!this.state.user) return null;
+        else {
+            return (
+                <div id="app" className={"app " + (this.state.isDark ? "dark" : "light")}>
+                    <Navbar
+                        toggleDarkMode={this.toggleDarkMode}/>
+                    <RoomList
+                        room={this.state.room}
+                        rooms={this.state.rooms}
+                        subscribeToRoom={this.subscribeToRoom}/>
+                    <RoomInfo
+                        user={this.state.user}
+                        room={this.state.room}
+                        deleteRoom={this.deleteRoom}/>
+                    <MessageList
+                        user={this.state.user}
+                        room={this.state.room}
+                        messages={this.state.messages}
+                        usersWhoAreTyping={this.state.usersWhoAreTyping}/>
+                    <SendMessageForm
+                        currentRoom={this.state.room}
+                        sendMessage={this.sendMessage}
+                        onChange={this.sendTypingEvent}/>
+                    <NewRoomForm createRoom={this.createRoom}/>
+                </div>
+            );
+        }
     }
 }
 

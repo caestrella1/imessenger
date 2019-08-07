@@ -4,7 +4,7 @@ class RoomInfo extends React.Component {
 
     getUsers() {
         let users = Object.values(this.props.room.users);
-        let replace = this.props.currentUser.name;
+        let replace = this.props.user.name;
         let regex = new RegExp(replace, 'g');
 
         return users.map((user) => {

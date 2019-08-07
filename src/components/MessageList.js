@@ -21,16 +21,17 @@ class MessageList extends React.Component {
         return (
             <div className="message-list">
                 {this.props.messages.map((message, index) => {
-                    return (
-                        <Message
-                            key={index}
-                            currentUser={this.props.currentUser}
-                            username={message.sender.name}
-                            text={message.parts[0].payload.content}
-                            sent={message.createdAt}
-                        />
-                    );
-                })}
+                        return (
+                            <Message
+                                key={index}
+                                user={this.props.user}
+                                username={message.sender.name}
+                                text={message.parts[0].payload.content}
+                                sent={message.createdAt}
+                            />
+                        );
+                    }
+                )}
                 <TypingIndicator
                     usersWhoAreTyping={this.props.usersWhoAreTyping}/>
             </div>

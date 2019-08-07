@@ -19,7 +19,7 @@ class Message extends React.Component {
     }
 
     render() {
-        const alignment = this.props.currentUser.name ===
+        const alignment = this.props.user.name ===
             this.props.username ? "sent" : "received";
 
         return (

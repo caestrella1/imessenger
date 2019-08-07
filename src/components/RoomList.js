@@ -4,32 +4,24 @@ class RoomList extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            roomId: null
-        };
-        this.listRooms = this.listRooms.bind(this);
+
+        this.getRoomsList = this.getRoomsList.bind(this);
         this.getRoomCount = this.getRoomCount.bind(this);
     }
 
     getRoomCount() {
-        return this.props.rooms.length +
-            (this.props.rooms.length > 1 || this.props.rooms.length === 0 ?
-            ' Rooms' : ' Room');
+        if (this.props.rooms) {
+            return this.props.rooms.length +
+                (this.props.rooms.length > 1 || this.props.rooms.length === 0 ?
+                ' Rooms' : ' Room');
+        }
+        return '0 Rooms';
     }
 
-    listRooms() {
-        if (this.props.rooms && this.props.room) {
-
-            /* Necessary so that the App's state updates and refreshes
-               on new notifications */
-            this.props.getRoomsList();
-
-            let orderedRooms = this.props.rooms.sort((a, b) =>
-                new Date(b.lastMessageAt) - new Date(a.lastMessageAt)
-            )
-
+    getRoomsList() {
+        if (this.props.room && this.props.rooms) {
             return (
-                orderedRooms.map(room => {
+                this.props.rooms.map(room => {
                     const active = this.props.room.id === room.id ? "active" : "";
                     const isPrivate = room.isPrivate ? "Private" : "Public";
                     const showUnread = room.unreadCount > 0 ? "show" : "";
@@ -73,7 +65,7 @@ class RoomList extends React.Component {
                     </div>
                 </div>
                 <ul className="room-list">
-                    {this.listRooms()}
+                    {this.getRoomsList()}
                 </ul>
             </div>
         );

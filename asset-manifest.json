@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/imessenger/static/css/main.7829bd51.chunk.css",
-    "main.js": "/imessenger/static/js/main.f4d67d7c.chunk.js",
-    "main.js.map": "/imessenger/static/js/main.f4d67d7c.chunk.js.map",
-    "runtime-main.js": "/imessenger/static/js/runtime-main.685f0f17.js",
-    "runtime-main.js.map": "/imessenger/static/js/runtime-main.685f0f17.js.map",
-    "static/css/2.b0f64131.chunk.css": "/imessenger/static/css/2.b0f64131.chunk.css",
-    "static/js/2.867ec036.chunk.js": "/imessenger/static/js/2.867ec036.chunk.js",
-    "static/js/2.867ec036.chunk.js.map": "/imessenger/static/js/2.867ec036.chunk.js.map",
-    "index.html": "/imessenger/index.html",
-    "precache-manifest.9c15f6170d486e4bdbad7f9cb3f26fba.js": "/imessenger/precache-manifest.9c15f6170d486e4bdbad7f9cb3f26fba.js",
-    "service-worker.js": "/imessenger/service-worker.js",
-    "static/css/2.b0f64131.chunk.css.map": "/imessenger/static/css/2.b0f64131.chunk.css.map",
-    "static/css/main.7829bd51.chunk.css.map": "/imessenger/static/css/main.7829bd51.chunk.css.map",
-    "static/js/2.867ec036.chunk.js.LICENSE": "/imessenger/static/js/2.867ec036.chunk.js.LICENSE"
+    "main.css": "/static/css/main.7829bd51.chunk.css",
+    "main.js": "/static/js/main.19018e4b.chunk.js",
+    "main.js.map": "/static/js/main.19018e4b.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e1d83920.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e1d83920.js.map",
+    "static/css/2.b0f64131.chunk.css": "/static/css/2.b0f64131.chunk.css",
+    "static/js/2.867ec036.chunk.js": "/static/js/2.867ec036.chunk.js",
+    "static/js/2.867ec036.chunk.js.map": "/static/js/2.867ec036.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.0c75ab8801d56deb85134c00eb4975b0.js": "/precache-manifest.0c75ab8801d56deb85134c00eb4975b0.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.b0f64131.chunk.css.map": "/static/css/2.b0f64131.chunk.css.map",
+    "static/css/main.7829bd51.chunk.css.map": "/static/css/main.7829bd51.chunk.css.map",
+    "static/js/2.867ec036.chunk.js.LICENSE": "/static/js/2.867ec036.chunk.js.LICENSE"
   },
   "entrypoints": [
-    "static/js/runtime-main.685f0f17.js",
+    "static/js/runtime-main.e1d83920.js",
     "static/css/2.b0f64131.chunk.css",
     "static/js/2.867ec036.chunk.js",
     "static/css/main.7829bd51.chunk.css",
-    "static/js/main.f4d67d7c.chunk.js"
+    "static/js/main.19018e4b.chunk.js"
   ]
 }
